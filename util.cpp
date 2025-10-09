@@ -20,20 +20,30 @@ std::set<std::string> parseStringToWords(string rawWords)
     stringstream ss(rawWords);
     std::string word, temp_word; 
 
+    // Read in each word from the string 
     while (ss >> word) { 
         for (size_t i = 0; i < word.length(); i++) {
             char letter = word[i]; 
-
+            
+            // If the current character is punctuation, only add it to the keywords if it is greater than 2 characters 
             if (ispunct(letter)) { 
               if (temp_word.length() >= 2) { 
                     keywords.insert(convToLower(temp_word)); 
               }
+              // Reset for next word 
               temp_word.clear(); 
             } 
+            // Otherwise, Add the next characters 
             else { 
                 temp_word += letter; 
             }
-        }  
+        } 
+        
+        // Check if there are any valid words remaining
+        if (temp_word.length() >= 2) { 
+            keywords.insert(convToLower(temp_word)); 
+            temp_word.clear(); 
+        }
     }
     return keywords; 
 

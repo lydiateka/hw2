@@ -25,10 +25,12 @@ std::string Book::getIsbn() const
 std::set<std::string> Book::keywords() const{
     std::set<std::string> keywords; 
     std::set<std::string> product = parseStringToWords(name_); 
-
     keywords.insert(product.begin(), product.end()); 
-    keywords.insert(isbn_);
-    keywords.insert(author_); 
+
+    // ISBN does not need to be parsed since it is one keyword 
+    keywords.insert(isbn_); 
+    std::set<std::string> authorWords = parseStringToWords(author_);
+    keywords.insert(authorWords.begin(), authorWords.end()); 
 
     return keywords; 
 }
@@ -37,14 +39,14 @@ std::string Book::displayString() const{
     std::ostringstream os; 
     os << name_ << "\n" 
     << "Author: " << author_ << " ISBN: " << isbn_ 
-    << "\n" << price_ << " " << qty_ << " left" << endl; 
+    << "\n" << fixed << setprecision(2) << price_ << " " << qty_ << " left."; 
 
     return os.str(); 
 }
 
 void Book::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << isbn_ << "\n" << author_ << endl;
+    os << category_ << "\n" << name_ << "\n" << fixed << setprecision(2) << price_ << "\n" << qty_ << "\n" << isbn_ << "\n" << author_ << endl;
 }
 
 

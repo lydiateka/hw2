@@ -10,6 +10,7 @@
  *  in this header file (since they are templates).
  *  Both functions should run in time O(n*log(n)) and not O(n^2)
  */
+
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
@@ -17,6 +18,7 @@ std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
     std::set<T> intersection_set; 
     typename std::set<T>::iterator it; 
     for (it = s1.begin(); it != s1.end(); it++) {
+        // Add item if it exists in both sets 
         if (s2.find(*it) != s2.end()) {
             intersection_set.insert(*it); 
         }
@@ -30,10 +32,13 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 
     std::set<T> union_set; 
     typename std::set<T>::iterator it; 
+
+    // Add all items from the first set 
     for (it = s1.begin(); it != s1.end(); it++) {
         union_set.insert(*it); 
     }
 
+    // Add all items for the second set
     for (it = s2.begin(); it != s2.end(); it++) {
         union_set.insert(*it); 
     }

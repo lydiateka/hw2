@@ -25,10 +25,13 @@ std::string Clothing::getSize() const
 std::set<std::string> Clothing::keywords() const{
     std::set<std::string> keywords; 
     std::set<std::string> product = parseStringToWords(name_); 
-
     keywords.insert(product.begin(), product.end()); 
-    keywords.insert(brand_);
-    keywords.insert(size_); 
+
+    std::set<std::string> brandWords = parseStringToWords(brand_); 
+    keywords.insert(brandWords.begin(), brandWords.end());
+
+    std::set<std::string> sizeWords = parseStringToWords(size_);
+    keywords.insert(sizeWords.begin(), sizeWords.end()); 
 
     return keywords; 
 }
@@ -36,15 +39,15 @@ std::set<std::string> Clothing::keywords() const{
 std::string Clothing::displayString() const{
     std::ostringstream os; 
     os << name_ << "\n" 
-    << "Size: " << size_ << "Brand: " << brand_ 
-    << "\n" << price_ << " " << qty_ << " left" << endl; 
+    << "Size: " << size_ << " Brand: " << brand_ 
+    << "\n" << fixed << setprecision(2) << price_ << " " << qty_ << " left."; 
     
     return os.str(); 
 }
 
 void Clothing::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << endl;
+    os << category_ << "\n" << name_ << "\n" << fixed << setprecision(2) << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << endl;
 }
 
 

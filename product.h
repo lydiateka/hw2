@@ -4,6 +4,7 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <iomanip>
 #include <algorithm>
 
 class Product {
